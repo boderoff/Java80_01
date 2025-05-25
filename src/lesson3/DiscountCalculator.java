@@ -11,7 +11,7 @@ public class DiscountCalculator {
             case "SALE10" -> System.out.print("Ваша скидка 10%");
             case "SALE20" -> System.out.print("Ваша скидка 20%");
             case "SALE50" -> System.out.print("Ваша скидка 50%");
-            default -> System.out.print("Скидки нет или введен неверный купон.");
+            default -> System.out.print("Скидки нет. или введен неверный купон.");
         }
     }
 }
