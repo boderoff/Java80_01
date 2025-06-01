@@ -17,7 +17,14 @@ public class Book {
     public void getAuthor() {
         System.out.println("Автор книги: " + author);
     }
-    public void fetPages() {
-
+    public void getPages() { System.out.println("Количество страниц: " + pages); }
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+    public void setPages(int pages) {
+        this.pages = pages;
+    }
+    public void setTitle(String title) {
+        this.title = title;
     }
 }
