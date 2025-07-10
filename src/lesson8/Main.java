@@ -2,6 +2,7 @@ package lesson8;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Collections;
 
 public class Main {
     public static void main(String[] args) {
@@ -32,16 +33,43 @@ public class Main {
 //        }
 
         //Player
-        System.out.println("Реализация Player:");
-        Player player = new Player();
+//        System.out.println("Реализация Player:");
+//        Player player = new Player();
+//
+//        player.play();
+//        player.record();
+//
+//        Playable playable = player;
+//        playable.play();
+//
+//        Recordable recordable = player;
+//        recordable.record();
 
-        player.play();
-        player.record();
+        List<Person> people = new ArrayList<>();
+        people.add(new Person("Иван", 25));
+        people.add(new Person("Мария", 30));
+        people.add(new Person("Алексей", 20));
+        people.add(new Person("Ольга", 22));
 
-        Playable playable = player;
-        playable.play();
+        // 1. Сортировка с использованием Comparable (по возрасту)
+        System.out.println("До сортировки по возрасту:");
+        printPeople(people);
 
-        Recordable recordable = player;
-        recordable.record();
+        Collections.sort(people); // Использует compareTo из Comparable
+        System.out.println("\nПосле сортировки по возрасту:");
+        printPeople(people);
+
+        // 2. Сортировка с использованием Comparator (по имени)
+        Collections.sort(people, new PersonNameComparator());
+        System.out.println("\nПосле сортировки по имени:");
+        printPeople(people);
+    }
+
+    private static void printPeople(List<Person> people) {
+        for (Person person : people) {
+            System.out.print(person.getName());
+            System.out.print(" ");
+            System.out.println(person.getAge());
+        }
     }
 }
