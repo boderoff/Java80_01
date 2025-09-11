@@ -4,6 +4,7 @@ package lesson11;
 import lesson8.Person;
 
 import java.util.*;
+import java.util.Map.Entry;
 import java.util.function.*;
 
 
@@ -102,10 +103,18 @@ public class Someexamples {
 
         System.out.println("Восьмая задача: Топ-К слов");
 //        PriorityQueue — это очередь с приоритетом, где элементы упорядочены согласно их естественному порядку или компаратору. Элемент с наивысшим приоритетом всегда находится в начале очереди
-        Map<String,Integer> freq = new HashMap<>();
-        PriorityQueue<Map.Entry<String,Integer>> pq = new PriorityQueue<>();
-        Comparator.comparing(Map.Entry::getValue).thenComparing(Map.Entry::getKey);
-        freq.add("java",5);
+        Map<String,Integer> freq = Map.of("java", 5, "stream", 2, "lambda", 3);
+        int k = 2;
+        List<Entry<String,Integer>> topK = topKFrequent(freq,k);
+
+        System.out.println("Example:");
+        System.out.println(freq);
+        System.out.println("Top " + k + ":");
+        for (Entry<String,Integer> entry : topK) {
+            System.out.println(entry.getKey() + "=" + entry.getValue());
+        }
+        System.out.println();
+
 
 
 
@@ -169,9 +178,33 @@ public class Someexamples {
     /**
      *  Создаем кучу с компаратором внутри
      */
-    public static List<Map.Entry<String,Integer>> topKFrequent(Map<String,Integer> freq, int k) {
-        PriorityQueue<Map.Entry<String,Integer>> pq;
-        pq = new PriorityQueue<>(Comparator.comparing(Map.Entry::getValue).thenComparing(Map.Entry::getKey));
+    public static List<Entry<String,Integer>> topKFrequent(Map<String,Integer> freq, int k) {
+        //Мини куча с компаратором
+        PriorityQueue<Entry<String, Integer>> pk = new PriorityQueue<>(
+                Comparator.comparing(Entry<String, Integer>::getValue).thenComparing(Entry<String, Integer>::getKey)
+        );
+        //Поддерживаем размер кучи
+        for (Entry<String, Integer> entry : freq.entrySet()) {
+            pk.offer(entry);
+
+            if (pk.size() > k) {
+                pk.poll();
+            }
+        }
+
+        List<Entry<String, Integer>> result = new ArrayList<>();
+        while (!pk.isEmpty()) {
+            result.add(pk.poll());
+        }
+
+        result.sort(
+                Comparator.comparing(Entry<String, Integer>::getValue).reversed().thenComparing(Entry::getKey)
+        );
+
+        return result;
+    }
+
+
         ;
     }
-}
+
