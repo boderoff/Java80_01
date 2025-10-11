@@ -1,9 +1,6 @@
 package lesson10;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 public class Task implements Comparable<Task>{
     private String title;
@@ -13,6 +10,7 @@ public class Task implements Comparable<Task>{
         this.title = title;
         this.priority = priority;
     }
+
 
     @Override
     public int compareTo(Task o) {
