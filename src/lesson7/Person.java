@@ -21,9 +21,8 @@ public class Person {
         return city;
     }
 
-    public Person(String name, int age, String city){
+    public Person(String name, String city){
         this.name = name;
-        this.age = age;
         this.city = city;
     }
 
