@@ -2,13 +2,15 @@ package lesson13;
 
 public class ThreadDemo {
     public static void main(String[] args) {
+        long programStart = System.currentTimeMillis();
+
         Thread t1 = new MyThread();
         Thread t2 = new Thread(new MyRunnable());
         Thread t3 = new Thread(() -> {
-            for (int i = 0; i < 6; i++) {
+            for (int i = 0; i < 3; i++) {
             System.out.println(Thread.currentThread().getName() + " - " + i);
             try {
-                Thread.sleep(1000);
+                Thread.sleep(500);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }}
@@ -30,5 +32,9 @@ public class ThreadDemo {
             throw new RuntimeException(e);
         }
         System.out.println("конец");
+
+        long programEnd = System.currentTimeMillis();
+        long totalTime = programEnd - programStart;
+        System.out.println("Общее время выполнения программы: " + totalTime + "ms");
     }
 }
