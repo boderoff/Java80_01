@@ -2,10 +2,12 @@ package lesson8;
 
 import java.util.Comparator;
 import java.util.Objects;
+import java.util.SimpleTimeZone;
 
 public class Person implements Comparable<Person> {
     private String name;
     private int age;
+    private String message = "Это cообщение";
 
     public Person(){}
 
@@ -14,6 +16,16 @@ public class Person implements Comparable<Person> {
         if (o == null || getClass() != o.getClass()) return false;
         Person person = (Person) o;
         return age == person.age && Objects.equals(name, person.name);
+    }
+
+    private void setMessage(String message){
+        this.message = message;
+        System.out.println(message);
+    }
+    private void setMessage2(String message, String name){
+        this.message = message;
+        this.name = name;
+        System.out.println(message + " " + name);
     }
 
     @Override
